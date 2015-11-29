@@ -1,0 +1,49 @@
+\input arrayjobx.sty
+
+
+\newarray\PrevSP
+\newarray\FrameData
+
+\newcount\Frame
+\newcount\SP
+\newcount\SQ
+\newcount\RetValue
+
+\catcode`!=11
+
+
+%% idris_Prelude_46_Basics_46__46_ () {
+%% 	_PSP[_F++]=${_SP}; _SP=${_SQ}; _SQ=$(( _SP + 1 ))
+%% 	idris__123_APPLY0_125_ "$5" "$6"
+%% 	_S[_SP]=${_R}
+%% 	idris__123_APPLY0_125_ "$4" "${_S[_SP]}"
+%% 	_SQ=${_SP}; _SP=${_PSP[--_F]}
+%% }
+\def\idris!Prelude!46!Basics!46!!46#1#2#3#4#5#6{
+ \advance\Frame by 1\relax
+ \PrevSP(\Frame)={\the\SP}
+ \SP=\SQ
+ \advance\SP by 1\relax
+ \SQ=\SP
+ \advance\SP by -1
+ \idris!!123!APPLY0!125!{#5}{#6}
+ \FrameData(\SP)=\RetValue
+ \idris!!123!APPLY0!125!{#4}{\the\RetValue}
+ \SQ=\SP
+ \advance\Frame by -1 \relax
+ \SP=\PrevSP(\Frame) \relax
+}
+
+\def\idris!!123!APPLY0!125!#1#2{(#1,#2)}
+
+
+\idris!Prelude!46!Basics!46!!46{11}{22}{33}{44}{55}{66}
+
+
+\the\Frame
+\hrule
+\PrevSP(\Frame)
+
+
+
+\bye
